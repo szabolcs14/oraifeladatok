@@ -1,45 +1,45 @@
-import java.util.*;
+public class Jatekos {
+    private String nev;
+    private int pozicio;
+    private int penz;
 
-public class Tarsasjatek {
+    public Jatekos(String nev) {
+        this.nev = nev;
+        this.pozicio = 0;
+        this.penz = 100;
+    }
 
-    public static void main(String[] args) {
-        // A mezők véletlenszerű elhelyezése
-        Set<Integer> semlegesMezok = new HashSet<>();
-        Set<Integer> elonyosMezok = new HashSet<>();
-        Set<Integer> hatranyosMezok = new HashSet<>();
-        Random rand = new Random();
+    public String getNev() {
+        return nev;
+    }
 
-        while (semlegesMezok.size() < 10) {
-            int index = rand.nextInt(20);
-            semlegesMezok.add(index);
-        }
+    public void setNev(String nev) {
+        this.nev = nev;
+    }
 
-        while (elonyosMezok.size() < 5) {
-            int index = rand.nextInt(20);
-            while (semlegesMezok.contains(index) || hatranyosMezok.contains(index)) {
-                index = rand.nextInt(20);
-            }
-            elonyosMezok.add(index);
-        }
+    public int getPozicio() {
+        return pozicio;
+    }
 
-        while (hatranyosMezok.size() < 5) {
-            int index = rand.nextInt(20);
-            while (semlegesMezok.contains(index) || elonyosMezok.contains(index)) {
-                index = rand.nextInt(20);
-            }
-            hatranyosMezok.add(index);
-        }
+    public void setPozicio(int pozicio) {
+        this.pozicio = pozicio;
+    }
 
-        for (int i = 0; i < 20; i++) {
-            if (elonyosMezok.contains(i)) {
-                tabla.add(new Mezo("bónusz", "Kapsz 1 extra lépést!"));
-            } else if (hatranyosMezok.contains(i)) {
-                tabla.add(new Mezo("akadály", "Vissza kell lépned 1-et!"));
-            } else {
-                tabla.add(new Mezo("normál", "Semmi különös, tovább léphetsz!"));
-            }
-        }
+    public int getPenz() {
+        return penz;
+    }
 
-        tabla.set(19, new Mezo("cél", "Célvonal! Nyertél!"));
+    public void setPenz(int penz) {
+        this.penz = penz;
+    }
+
+    public void lep(int lepesszam) {
+        this.pozicio += lepesszam;
+        System.out.println(nev + " lépett " + lepesszam + " mezőt, most a " + pozicio + ". mezőn áll.");
+    }
+
+    public void modositPenz(int osszeg) {
+        this.penz += osszeg;
+        System.out.println(nev + " új pénzösszege: " + penz);
     }
 }
