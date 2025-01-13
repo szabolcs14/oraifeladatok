@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Tarsasjatek {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Adja meg a játékosok számát (2-4): ");
@@ -26,7 +26,6 @@ public class Tarsasjatek {
         Set<Integer> semlegesMezok = new HashSet<>();
         Set<Integer> elonyosMezok = new HashSet<>();
         Set<Integer> hatranyosMezok = new HashSet<>();
-        Set<Integer> visszadoboMezok = new HashSet<>();
         Random rand = new Random();
 
         while (semlegesMezok.size() < 10) {
@@ -36,35 +35,25 @@ public class Tarsasjatek {
 
         while (elonyosMezok.size() < 5) {
             int index = rand.nextInt(20);
-            while (semlegesMezok.contains(index) || hatranyosMezok.contains(index) || visszadoboMezok.contains(index)) {
+            while (semlegesMezok.contains(index) || hatranyosMezok.contains(index)) {
                 index = rand.nextInt(20);
             }
             elonyosMezok.add(index);
         }
 
-        while (hatranyosMezok.size() < 4) {
+        while (hatranyosMezok.size() < 5) {
             int index = rand.nextInt(20);
-            while (semlegesMezok.contains(index) || elonyosMezok.contains(index) || visszadoboMezok.contains(index)) {
+            while (semlegesMezok.contains(index) || elonyosMezok.contains(index)) {
                 index = rand.nextInt(20);
             }
             hatranyosMezok.add(index);
         }
 
-        while (visszadoboMezok.size() < 1) {
-            int index = rand.nextInt(20);
-            while (semlegesMezok.contains(index) || elonyosMezok.contains(index) || hatranyosMezok.contains(index)) {
-                index = rand.nextInt(20);
-            }
-            visszadoboMezok.add(index);
-        }
-
         for (int i = 0; i < 20; i++) {
             if (elonyosMezok.contains(i)) {
-                tabla.add(new Mezo("bónusz", "Kapsz 1 vagy 2 extra lépést!"));
+                tabla.add(new Mezo("bónusz", "Kapsz 1 extra lépést!"));
             } else if (hatranyosMezok.contains(i)) {
-                tabla.add(new Mezo("akadály", "Vissza kell lépned 1 vagy 2 mezőt!"));
-            } else if (visszadoboMezok.contains(i)) {
-                tabla.add(new Mezo("visszadob", "Visszadob az elejére!"));
+                tabla.add(new Mezo("akadály", "Vissza kell lépned 1-et!"));
             } else {
                 tabla.add(new Mezo("normál", "Semmi különös, tovább léphetsz!"));
             }
@@ -76,11 +65,9 @@ public class Tarsasjatek {
 
         while (true) {
             Jatekos aktualisJatekos = jatekosok.get(aktualisJatekosIndex);
-            System.out.println(aktualisJatekos.getNev() + " következik. Nyomj Entert a dobáshoz!");
+            System.out.println(aktualisJatekos.getNev() + " következik.");
 
-            sc.nextLine();
-
-            int lepesszam = porgoDobas();
+            int lepesszam = new Random().nextInt(6) + 1;
 
             String dobottSzam;
             switch (lepesszam) {
@@ -123,42 +110,10 @@ public class Tarsasjatek {
 
             if (aktualisJatekos.getPozicio() < tabla.size()) {
                 Mezo aktualisMezo = tabla.get(aktualisJatekos.getPozicio());
-
-                if (aktualisMezo.getTipus().equals("bónusz")) {
-                    int extraLepes = rand.nextInt(2) + 1;
-                    System.out.println(aktualisJatekos.getNev() + " bónusz mezőre lépett! Kapsz " + extraLepes + " bónusz lépést.");
-                    aktualisJatekos.lep(extraLepes);
-                    System.out.println(aktualisJatekos.getNev() + " előrelépett " + extraLepes + " mezőt, most a " + aktualisJatekos.getPozicio() + ". mezőn áll.");
-                } else if (aktualisMezo.getTipus().equals("akadály")) {
-                    int minuszLepes = rand.nextInt(2) + 1;
-                    System.out.println(aktualisJatekos.getNev() + " akadály mezőre lépett! Vissza kell lépned " + minuszLepes + " mezőt.");
-                    aktualisJatekos.lep(-minuszLepes);
-                    System.out.println(aktualisJatekos.getNev() + " visszalépett " + minuszLepes + " mezőt, most a " + aktualisJatekos.getPozicio() + ". mezőn áll.");
-                } else if (aktualisMezo.getTipus().equals("visszadob")) {
-                    System.out.println(aktualisJatekos.getNev() + " akadály mezőre lépett! Visszadob az elejére!");
-                    aktualisJatekos.setPozicio(0);
-                    System.out.println(aktualisJatekos.getNev() + " most az " + aktualisJatekos.getPozicio() + ". mezőn áll.");
-                } else {
-                    System.out.println(aktualisJatekos.getNev() + " normál mezőre lépett! Semmi különös, tovább léphetsz!");
-                    System.out.println(aktualisJatekos.getNev() + " a/z " + aktualisJatekos.getPozicio() + ". mezőn áll.");
-                }
+                aktualisMezo.effect(aktualisJatekos);
             }
 
             aktualisJatekosIndex = (aktualisJatekosIndex + 1) % jatekosok.size();
         }
-    }
-
-    public static int porgoDobas() throws InterruptedException {
-        Random rand = new Random();
-        int szam = 0;
-        long start = System.currentTimeMillis();
-
-        while (System.currentTimeMillis() - start < 3000) {
-            szam = rand.nextInt(6) + 1;
-            System.out.print("\rDobás: " + szam);
-            Thread.sleep(100);
-        }
-        System.out.println();
-        return szam;
     }
 }

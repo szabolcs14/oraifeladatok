@@ -37,7 +37,7 @@ public class Mezo {
                 break;
             case "akadály":
                 int minuszLepes = new Random().nextInt(2) + 1;
-                System.out.println(jatekos.getNev() + " akadály mezőre lépett!");
+                System.out.println(jatekos.getNev() + " akadály mezőre lépett! Vissza kell lépnie " + minuszLepes + " lépést!");
                 jatekos.lep(-minuszLepes);
                 break;
             case "visszadob":
