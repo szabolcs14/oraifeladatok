@@ -5,10 +5,10 @@ function kuldes(){
     const karakterek = "#&*!%";
     const nagyBetuk = "AÁBCDEÉFGHIÍJKLMNOÓÖŐPQRSTUÚÜŰVWXYZ";
 
-    while (jelszo == ""){
+    if (jelszo == ""){
             alert("Nincs megadva jelszó! a jelszó gyenge"); 
-        } else {
-           if (jelszo.length < 8) {
+     } else {
+        if (jelszo.length < 8) {
             alert("A jelszó túl rövid ! A jelszó kevésbé-gyenge");
         } else if (jelszo.includes(szamok[i])) {
             alert("A jelszó erőssége közepes");
