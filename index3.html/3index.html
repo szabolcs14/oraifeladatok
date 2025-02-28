@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feladat rendező</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/design.css">
+</head>
+
+<body>
+    <header class="p-4">
+        <h1 class="text-center">Feladat osztó</h1>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Név:</label>
+                        <input type="email" class="form-control email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Prioritás:</label>
+                        <select class="form-select surgos">
+                            <option value="Alacsony">alacsony</option>
+                            <option value="Közepes">közepes</option>
+                            <option value="Magas">magas</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Feladat:</label>
+                        <textarea class="form-control uzenet" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-success" onclick="kuldes()">Küldés</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
+           
+        </section>
+        <section>
+            <h2 class="text-center p-4">Feladatok</h2>
+            <div class="container">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="tsrsz">#</th>
+                        <th scope="col" class="temail">Nev</th>
+                        <th scope="col" class="tsurgos">Sürgős?</th>
+                        <th scope="col">Feladat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                  <hr>
+            </div>
+        </section>
+        <section>
+            <h2 class="text-center p-4">Feladatok rendezve</h2>
+            <div class="container">
+                <ul class="emailLista">
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p class="text-center">Minden jog fenntartva!</p>
+    </footer>
+    <script src="js/teszt.js"></script>
+</body>
+
+</html>
+
+var emailLista = [];
+
+function kuldes() {
+    var email = document.querySelector(".email").value;
+    var surgos = document.querySelector(".surgos").value;
+    var uzenet = document.querySelector(".uzenet").value;
+
+    var tbody = document.querySelector("tbody");
+
+    emailLista.push(email);
+    tbody.innerHTML += `<tr>
+                        <th scope="row">${emailLista.length}</th>
+                        <td>${email}</td>
+                        <td>${surgos}</td>
+                        <td>${uzenet}</td>
+                      </tr>`;
+    emailListaKiir();
+}
+function emailListaKiir() {
+    rendez(emailLista);
+    var lista = document.querySelector(".emailLista");
+    lista.innerHTML = "";
+    for (let i = 0; i < emailLista.length; i++) {
+        lista.innerHTML += "<li>" + emailLista[i] + "</li>";
+    }
+}
+function rendez(mit) {
+    var csere;
+    for (let i = 0; i < mit.length - 1; i++) {
+        for (let j = i + 1; j < mit.length; j++) {
+            if (mit[i] > mit[j]) {
+                csere = mit[i];
+                mit[i] = mit[j];
+                mit[j] = csere;
+            }
+        }
+    }
+}
+function feladatVizsgal(mit) {
+   
+    var surgos = document.querySelector(".surgos").value;
+    mit = surgos.innerHTML;
+
+    if(surgos.value=="alacsony") {
+    mit = document.querySelector("surgos").classList.addClass("kek");
+    }
+}
+
