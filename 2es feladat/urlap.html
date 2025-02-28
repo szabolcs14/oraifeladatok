@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Értékelő</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/design.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-center">Értékelő</h1>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <div class="text-center d-flex chips"><img src="images/chips.png" alt="Lays Chips" title="Chips"></div>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Név:</label>
+                        <input type="email" class="form-control nev">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">E-mail cím:</label>
+                        <input type="email" class="form-control email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Értékelés:</label>
+                        <input type="number" class="form-control ertekeles">
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-warning" onclick="kuldes()">Küldés</button>
+                    </div>
+                </form>
+                <hr>
+            </div>
+           
+        </section>
+        <section>
+            <h2 class="text-center">Értékelések</h2>
+            <div class="container">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="tsrsz">#</th>
+                        <th scope="col" class="tnev">Név</th>
+                        <th scope="col" class="temail">E-mail</th>
+                        <th scope="col" class="tertekeles">Értékelés</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                  <hr>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p class="text-center">&copy; Minden jog fenntartva!</p>
+    </footer>
+    <script src="js/urlap.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelszó erősség</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/design.css">
+</head>
+<body>
+    <header class="p-4">
+        <h1 class="text-center">Jelszó vizsgáló</h1>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <form>
+                      <div class="mb-3">
+                        <label class="form-label">Jelszó:</label>
+                        <input type="password" class="form-control jelszo">
+                      </div>
+                </form>
+                <div class="mb-3">
+                    <div><button type="button" class="btn btn-success" onclick="kuldes()">Küldés</button></div>
+                </div>
+                <div class="mb-3">
+                    <p>A jelszó erőssége:<span class="erossegDiv"></span></p>
+                </div>
+                <hr>
+            </div>
+        </section>
+    </main>
+    <footer class="p-4">
+        <p class="text-center">&copy; Copyright - Minden jog fenntartva!</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

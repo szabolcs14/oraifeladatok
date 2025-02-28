@@ -1,0 +1,11 @@
+.chips{
+    flex-direction: column;
+    align-content: center;
+    align-items: center !important;
+    padding: 5px auto;
+}
+
+.chips img{
+    width: 200px;
+    height: 150px;
+}
